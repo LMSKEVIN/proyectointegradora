@@ -36,8 +36,12 @@ git status -s
 git add <nombre del documento>
 //para finalizar los cambios
 git commit -m "Que cambios hiciste"
+//antes de enviar todo verificar que estemos en la rama main 
+git branche
+//si no estamos en main y aparece master corre el siguiente comando
+git branch -m master main
 //para subir todo al github
-git push origin <rama donde se subira>
+git push origin <rama desde donde se subira>
 //para actualizar la informacion del proyecto en tu equipo
 git pull
 
