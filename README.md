@@ -20,5 +20,8 @@
 
 ---
 
-```Dart
+```git
+git tag v1 -m "Vercion 1"
+git push --tags
+```
 
