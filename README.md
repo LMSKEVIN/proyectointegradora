@@ -55,5 +55,8 @@ git merge <rapa que quieres fucionar>
 //si hay conflictos debes solucionarlos para poder hacer la fucion
 //https://www.youtube.com/watch?v=EKCRjnvron4&list=PLU8oAlHdN5BlyaPFiNQcV0xDqy0eR35aU&index=7
 
+//pull request
+//https://www.youtube.com/watch?v=4YlHQAETkPs&list=PLU8oAlHdN5BlyaPFiNQcV0xDqy0eR35aU&index=10
+
 ```
 
