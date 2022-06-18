@@ -21,9 +21,11 @@
 ---
 
 ```git
-git tag v1 -m "Vercion 1"
-git push --tags
 
+//inicio de git
+git init
+//clonar repo en tu pc
+git clone 
 //para mirar que documentos estan sin rastrear por git
 git status -s
 //para a;adir estos documentos al sketch
@@ -34,6 +36,9 @@ git commit -m "Que cambios hiciste"
 git push origin <rama donde se subira>
 //para actualizar la informacion del proyecto en tu equipo
 git pull
+//control de vercion
+git tag v1 -m "Vercion 1"
+git push --tags
 
 ```
 
