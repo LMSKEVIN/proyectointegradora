@@ -1,7 +1,9 @@
 # Proyecto-integradora-2
 
-|Integrantes     |Correo     |
-|-----|-----|
+##Integrantes
+
+---
+
 
 <table>
   <tr>
