@@ -38,9 +38,22 @@ git commit -m "Que cambios hiciste"
 git push origin <rama donde se subira>
 //para actualizar la informacion del proyecto en tu equipo
 git pull
+
 //control de vercion
 git tag v1 -m "Vercion 1"
 git push --tags
+
+//para crear una rama en git
+git branche <nombre de la rama>
+//para saber en que rama estamos trabajando
+git branche
+//para cambiar de rama
+git checkout javascript
+//fucionar ramas
+git checkout master
+git merge <rapa que quieres fucionar>
+//si hay conflictos debes solucionarlos para poder hacer la fucion
+//https://www.youtube.com/watch?v=EKCRjnvron4&list=PLU8oAlHdN5BlyaPFiNQcV0xDqy0eR35aU&index=7
 
 ```
 
