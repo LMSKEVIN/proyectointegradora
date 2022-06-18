@@ -25,7 +25,7 @@
 //inicio de git
 git init
 //clonar repo en tu pc
-git clone 
+git clone https://github.com/LMSKEVIN/Proyecto-integradora-2.git
 //para mirar que documentos estan sin rastrear por git
 git status -s
 //para a;adir estos documentos al sketch
