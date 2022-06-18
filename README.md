@@ -18,6 +18,8 @@
 
 ## Documentación
 
+<a href="https://www.youtube.com/watch?v=ANF1X42_ae4&list=PLU8oAlHdN5BlyaPFiNQcV0xDqy0eR35aU&index=2"> Curso git</a>
+
 ---
 
 ```git
