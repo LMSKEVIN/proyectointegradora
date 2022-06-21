@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class Login extends StatefulWidget {
-  Login({Key? key}) : super(key: key);
+  const Login({Key? key}) : super(key: key);
 
   @override
   State<Login> createState() => _LoginState();
@@ -19,18 +19,15 @@ class _LoginState extends State<Login> {
         children: <Widget>[
           Container(
             alignment: Alignment.center,
-            padding: const EdgeInsets.all(10),
-            child: const Text(
-              "Sunrise",
-              style: TextStyle(
-                  color: Colors.amber,
-                  fontWeight: FontWeight.w500,
-                  fontSize: 30),
-            ),
+            width: 100,
+            height: 200,
+            child: Image.asset('assets/dibujo.png'),
           ),
           Container(
             alignment: Alignment.center,
             padding: const EdgeInsets.all(10),
+            width: 200,
+            height: 200,
             child: const Text(
               "Sign in",
               style: TextStyle(
