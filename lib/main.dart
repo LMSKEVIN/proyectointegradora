@@ -4,6 +4,6 @@ import 'package:integradoraproyect/db/mongodb.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await MongoDB.conectar();
+  await MongoDatabase.connect();
   runApp(const App());
 }
