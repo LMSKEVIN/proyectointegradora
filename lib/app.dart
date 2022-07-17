@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/screens/inicio.dart';
+import 'package:integradoraproyect/screens/pruebas.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -8,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: Inicio(),
+      home:  Inicio(),
     );
   }
 }

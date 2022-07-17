@@ -158,12 +158,13 @@ class _RegisterState extends State<Register> {
                           user: _userController.text,
                           email: _emailController.text,
                           password: _passwordController.text);
-                      MongoDatabase.insertar(newuser);
+                      MongoDatabase.insertaruser(newuser);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                             builder: (context) => Login(),
-                          ));
+                          ),
+                      );
                     },
                     child: const Text(
                       'Sign up',

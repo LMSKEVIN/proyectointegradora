@@ -3,10 +3,12 @@ import 'package:integradoraproyect/constant/const.dart';
 import 'package:integradoraproyect/model/user.dart';
 import 'package:mongo_dart/mongo_dart.dart';
 
+import '../model/recados.dart';
+
 class MongoDatabase {
-  static var db, collection;
+  static var collection;
   static connect() async {
-    db = await Db.create(mongoURL);
+    var db = await Db.create(mongoURL);
     await db.open();
     inspect(db);
     collection = db.collection(colectionName);
@@ -22,17 +24,18 @@ class MongoDatabase {
     }
   }
 
-  static insertar(Usuario usuario) async {
+  static insertaruser(Usuario usuario) async {
     await collection.insertAll([usuario.toMap()]);
   }
-
-  static actualizar(Usuario usuario) async {
-    var u = await collection.findOne({/*'_id': usuario.id*/});
-    u['user'] = usuario.user;
-    u['password'] = usuario.password;
+  static insertarlista(Usuario usuario, Recados recados) async {
+    await collection.insert(where.eq('userdata.user', usuario.user));
   }
 
-  /*static eliminar(Usuario usuario) async {
-    await collection.remove(where.id(usuario.id));
-  }*/
+  static actualizar(Usuario usuario, Recados recados) async {
+    var u = await collection.update(where.eq('userdata.user', usuario.user), modify.push('list', recados.toMap()));
+  }
+  static eliminar(Usuario usuario) async{
+    await collection.remove(where.eq('user', usuario.user));
+  }
+  
 }
