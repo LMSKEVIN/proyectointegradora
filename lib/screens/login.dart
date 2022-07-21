@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:integradoraproyect/db/mongodb.dart';
 import 'package:integradoraproyect/screens/register.dart';
+import 'package:integradoraproyect/screens/session.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -9,8 +11,37 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  _usuario(BuildContext context) async{
+    var dat = await MongoDatabase.logUsuario(_userController, _passwordController);
+    if(dat != null){
+      var user = _userController.text;
+      Navigator.push(context, MaterialPageRoute(builder: ((context) => Session(user: user))));
+    }else{
+      showDialog(context: context, builder: (BuildContext context){
+        return AlertDialog(
+          title:  const Text('Error'),
+          content: SingleChildScrollView(
+            child: ListBody(children: const [
+                Text('Usuario o contraseña invalido'),
+              ]
+            ),
+          ),
+          actions: [
+            TextButton(onPressed: (() {
+              Navigator.of(context).pop();
+              _userController.clear();
+              _passwordController.clear();
+            }),
+            child: const Text('Acceptar'),
+            )
+          ],
+        );
+      });
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,16 +82,16 @@ class _LoginState extends State<Login> {
                   height: 100.0,
                 ),
                 TextField(
-                  controller: _emailController,
-                  cursorColor: Color.fromARGB(255, 142, 108, 136),
+                  controller: _userController,
+                  cursorColor: const Color.fromARGB(255, 142, 108, 136),
                   style: TextStyle(
                       color:
-                          Color.fromARGB(255, 142, 108, 136).withOpacity(0.9)),
+                          const Color.fromARGB(255, 142, 108, 136).withOpacity(0.9)),
                   decoration: InputDecoration(
-                    labelText: 'Email',
+                    labelText: 'Usuario',
                     labelStyle: TextStyle(
                       color:
-                          Color.fromARGB(255, 142, 108, 136).withOpacity(0.9),
+                          const Color.fromARGB(255, 142, 108, 136).withOpacity(0.9),
                     ),
                     filled: true,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
@@ -91,7 +122,7 @@ class _LoginState extends State<Login> {
                       color: const Color.fromARGB(255, 142, 108, 136)
                           .withOpacity(0.9)),
                   decoration: InputDecoration(
-                    labelText: 'Password',
+                    labelText: 'Contraseña',
                     labelStyle: TextStyle(
                       color: const Color.fromARGB(255, 142, 108, 136)
                           .withOpacity(0.9),
@@ -123,15 +154,9 @@ class _LoginState extends State<Login> {
                   decoration:
                       BoxDecoration(borderRadius: BorderRadius.circular(90)),
                   child: ElevatedButton(
-                    onPressed: () {},
-                    child: const Text(
-                      'Log in',
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
+                    onPressed: () {
+                      _usuario(context);
+                    },
                     style: ButtonStyle(
                         backgroundColor:
                             MaterialStateProperty.resolveWith((states) {
@@ -144,13 +169,21 @@ class _LoginState extends State<Login> {
                             MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(30)))),
+                    child: const Text(
+                      'Login',
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
                   ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Text(
-                      "Don't have a account? ",
+                      "No tienes una cuenta? ",
                       style: TextStyle(color: Colors.black),
                     ),
                     GestureDetector(
@@ -161,7 +194,7 @@ class _LoginState extends State<Login> {
                                 builder: (context) => Register()));
                       },
                       child: const Text(
-                        ' Sign up',
+                        ' Registrarse',
                         style: TextStyle(
                             color: Color.fromARGB(255, 142, 108, 136),
                             fontWeight: FontWeight.bold),

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/screens/login.dart';
 import 'package:integradoraproyect/screens/register.dart';
-// ignore: prefer_typing_uninitialized_variables
 
 class Inicio extends StatefulWidget {
   const Inicio({Key? key}) : super(key: key);
@@ -93,8 +92,7 @@ class _InicioState extends State<Inicio> {
                                         .contains(MaterialState.pressed)) {
                                       return Colors.black26;
                                     }
-                                    return const Color.fromARGB(
-                                        255, 255, 203, 119);
+                                    return const Color.fromARGB(255, 255, 203, 119);
                                   }),
                                   shape: MaterialStateProperty.all<
                                       RoundedRectangleBorder>(

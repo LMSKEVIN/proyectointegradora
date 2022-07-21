@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'package:flutter/widgets.dart';
 import 'package:integradoraproyect/constant/const.dart';
 import 'package:integradoraproyect/model/user.dart';
 import 'package:mongo_dart/mongo_dart.dart';
@@ -19,7 +20,6 @@ class MongoDatabase {
       final usuario = await collection.find().toList();
       return usuario;
     } catch (e) {
-      print(e);
       return Future.value();
     }
   }
@@ -29,6 +29,10 @@ class MongoDatabase {
   }
   static insertarlista(Usuario usuario, Recados recados) async {
     await collection.insert(where.eq('userdata.user', usuario.user));
+  }
+  static logUsuario(TextEditingController user, TextEditingController pass) async{
+    var u = await collection.findOne({'userdata.user': user.text.toString(), 'userdata.password': pass.text.toString()});
+    return u;
   }
 
   static actualizar(Usuario usuario, Recados recados) async {

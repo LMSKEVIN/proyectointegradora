@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:integradoraproyect/screens/inicio.dart';
-import 'package:integradoraproyect/screens/pruebas.dart';
+import 'package:integradoraproyect/screens/login.dart';
+import 'package:integradoraproyect/screens/session.dart';
 
 class App extends StatelessWidget {
   const App({Key? key}) : super(key: key);
@@ -9,7 +9,7 @@ class App extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home:  Inicio(),
+      home:  Login(),
     );
   }
 }
