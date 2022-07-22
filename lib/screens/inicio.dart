@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/screens/login.dart';
 import 'package:integradoraproyect/screens/register.dart';
+import 'package:animated_text_kit/animated_text_kit.dart';
 
 class Inicio extends StatefulWidget {
   const Inicio({Key? key}) : super(key: key);
@@ -10,6 +11,16 @@ class Inicio extends StatefulWidget {
 }
 
 class _InicioState extends State<Inicio> {
+  static const colorizeColors = [
+    Colors.blue,
+    Colors.amber,
+    Colors.yellow,
+    Colors.black,
+  ];
+  static const colorizeTextStyle = TextStyle(
+    fontSize: 75.0,
+    fontFamily: 'Horizon',
+  );
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,115 +40,119 @@ class _InicioState extends State<Inicio> {
         child: SingleChildScrollView(
           child: Padding(
             padding: EdgeInsets.fromLTRB(
-                20, MediaQuery.of(context).size.height * 0.2, 20, 0),
+                20, MediaQuery.of(context).size.height * 0.1, 20, 0),
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Image.asset(
-                  'assets/dibujo.png',
-                ),
-                const SizedBox(
-                  height: 100.0,
-                ),
                 Container(
                   padding: const EdgeInsets.all(15.0),
                   alignment: Alignment.topLeft,
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      const Text(
-                        'Explora un mundo de posibilidades con ',
-                        style: TextStyle(
-                            color: Color.fromARGB(255, 142, 108, 136),
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold),
-                      ),
-                      const Text(
-                        'Sunrise',
-                        style: TextStyle(
-                            color: Colors.amber,
-                            fontSize: 50,
-                            fontWeight: FontWeight.bold),
-                      ),
                       SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.2,
-                      ),
-                      Container(
-                        width: double.infinity,
+                        width: 250.0,
                         child: Center(
-                          child: Column(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Login(),
-                                      ));
-                                },
-                                child: const Text(
-                                  'Sign up',
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.resolveWith(
-                                          (states) {
-                                    if (states
-                                        .contains(MaterialState.pressed)) {
-                                      return Colors.black26;
-                                    }
-                                    return const Color.fromARGB(255, 255, 203, 119);
-                                  }),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                              ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => Register(),
-                                      ));
-                                },
-                                child: const Text(
-                                  'Sign up',
-                                  style: TextStyle(
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                  ),
-                                ),
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.resolveWith(
-                                          (states) {
-                                    if (states
-                                        .contains(MaterialState.pressed)) {
-                                      return Colors.black26;
-                                    }
-                                    return const Color.fromARGB(
-                                        255, 255, 203, 119);
-                                  }),
-                                  shape: MaterialStateProperty.all<
-                                      RoundedRectangleBorder>(
-                                    RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(30),
-                                    ),
-                                  ),
-                                ),
+                          child: AnimatedTextKit(
+                            animatedTexts: [
+                              ColorizeAnimatedText(
+                                'Sunrise',
+                                textStyle: colorizeTextStyle,
+                                colors: colorizeColors,
                               ),
                             ],
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.01,
+                      ),
+                      SizedBox(
+                        height: 300,
+                        width: double.infinity,
+                        child: Image.asset('assets/logo.png'),
+                      ),
+                      SizedBox(
+                        height: MediaQuery.of(context).size.height * 0.1,
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(90)),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Login(),
+                              ),
+                            );
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith((states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return Colors.black26;
+                              }
+                              return const Color.fromARGB(255, 255, 203, 119);
+                            }),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                          ),
+                          child: const Text(
+                            'Iniciar sesión',
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                        ),
+                      ),
+                      Container(
+                        width: MediaQuery.of(context).size.width,
+                        height: 50,
+                        margin: const EdgeInsets.fromLTRB(0, 10, 0, 20),
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(90)),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => Register(),
+                              ),
+                            );
+                          },
+                          style: ButtonStyle(
+                            backgroundColor:
+                                MaterialStateProperty.resolveWith((states) {
+                              if (states.contains(MaterialState.pressed)) {
+                                return Colors.black26;
+                              }
+                              return const Color.fromARGB(255, 255, 203, 119);
+                            }),
+                            shape: MaterialStateProperty.all<
+                                RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30),
+                              ),
+                            ),
+                          ),
+                          child: const Text(
+                            'Registrarse',
+                            style: TextStyle(
+                              color: Colors.black87,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
                           ),
                         ),
                       ),

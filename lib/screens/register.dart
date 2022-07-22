@@ -11,9 +11,52 @@ class Register extends StatefulWidget {
 }
 
 class _RegisterState extends State<Register> {
-  TextEditingController _userController = TextEditingController();
-  TextEditingController _emailController = TextEditingController();
-  TextEditingController _passwordController = TextEditingController();
+  final TextEditingController _userController = TextEditingController();
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
+
+  void _registro() {
+    if (_userController.text.toString() != '' &&
+        _emailController.text.toString() != '' &&
+        _passwordController.toString() != '') {
+      Usuario newuser = Usuario(
+          user: _userController.text,
+          email: _emailController.text,
+          password: _passwordController.text);
+      MongoDatabase.insertaruser(newuser);
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Login(),
+        ),
+      );
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: SingleChildScrollView(
+                child: ListBody(children: const [
+                  Text('No se rellenaron todos los campos'),
+                ]),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: (() {
+                    Navigator.of(context).pop();
+                    _userController.clear();
+                    _passwordController.clear();
+                    _emailController.clear();
+                  }),
+                  child: const Text('Acceptar'),
+                )
+              ],
+            );
+          });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -154,26 +197,8 @@ class _RegisterState extends State<Register> {
                       BoxDecoration(borderRadius: BorderRadius.circular(90)),
                   child: ElevatedButton(
                     onPressed: () {
-                      Usuario newuser = Usuario(
-                          user: _userController.text,
-                          email: _emailController.text,
-                          password: _passwordController.text);
-                      MongoDatabase.insertaruser(newuser);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => Login(),
-                          ),
-                      );
+                      _registro();
                     },
-                    child: const Text(
-                      'Sign up',
-                      style: TextStyle(
-                        color: Colors.black87,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 16,
-                      ),
-                    ),
                     style: ButtonStyle(
                       backgroundColor:
                           MaterialStateProperty.resolveWith((states) {
@@ -186,6 +211,14 @@ class _RegisterState extends State<Register> {
                         RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(30),
                         ),
+                      ),
+                    ),
+                    child: const Text(
+                      'Registrarse',
+                      style: TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
                       ),
                     ),
                   ),
