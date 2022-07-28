@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/api/api.dart';
 import 'package:integradoraproyect/widgets/spinner.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class Exterior extends StatefulWidget {
   Exterior({Key? key, required this.datos}) : super(key: key);
@@ -45,7 +46,7 @@ class _ExteriorState extends State<Exterior> {
           child: Column(
             children: [
               SizedBox(
-                height: MediaQuery.of(context).size.height,
+                height: MediaQuery.of(context).size.height / 5,
                 width: MediaQuery.of(context).size.width,
                 child: FutureBuilder(
                   future: apiDatos(),
@@ -54,39 +55,35 @@ class _ExteriorState extends State<Exterior> {
                       var da = double.parse(
                               snapshot.data['main']['temp'].toString()) -
                           273.15;
-                      return Center(
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 100,
-                              width: double.infinity,
-                              child: Center(
-                                child: Text(
-                                  snapshot.data['name'].toString(),
-                                  style: const TextStyle(
-                                    color: Color.fromARGB(255, 255, 203, 119),
-                                    fontSize: 50,
-                                  ),
-                                ),
+                      return Container(
+                        height: 120.0,
+                        margin: const EdgeInsets.symmetric(
+                            vertical: 16.0, horizontal: 24.0),
+                        child: Stack(
+                          children: <Widget>[
+                            Container(
+                              height: 124,
+                              margin: const EdgeInsets.only(left: 46.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white70,
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(8.0),
+                                boxShadow: const <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 10.0,
+                                    offset: Offset(0.0, 10.0),
+                                  )
+                                ],
                               ),
                             ),
-                            SizedBox(
-                              height: 300,
-                              child: Center(
-                                child: Image.asset(_imgLoader(da).toString()),
-                              ),
-                            ),
-                            SizedBox(
-                              height: 100,
-                              width: double.infinity,
-                              child: Center(
-                                child: Text(
-                                  '${(double.parse(snapshot.data['main']['temp'].toString()) - 273.15).toStringAsFixed(0)}°C',
-                                  style: const TextStyle(
-                                    color: Color.fromARGB(255, 198, 73, 86),
-                                    fontSize: 50,
-                                  ),
-                                ),
+                            Container(
+                              margin: const EdgeInsets.symmetric(vertical: 5.0),
+                              alignment: FractionalOffset.centerLeft,
+                              child: Image(
+                                image: AssetImage(_imgLoader(da)),
+                                height: 100.0,
+                                width: 120.0,
                               ),
                             ),
                           ],
@@ -107,3 +104,7 @@ class _ExteriorState extends State<Exterior> {
     );
   }
 }
+
+/*
+
+*/

@@ -14,34 +14,40 @@ class _LoginState extends State<Login> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
-  _usuario(BuildContext context) async{
-    var dat = await MongoDatabase.logUsuario(_userController, _passwordController);
-    if(dat != null){
+  _usuario(BuildContext context) async {
+    var dat =
+        await MongoDatabase.logUsuario(_userController, _passwordController);
+    if (dat != null) {
       var user = _userController.text;
-      Navigator.push(context, MaterialPageRoute(builder: ((context) => Session(user: user))));
-    }else{
-      showDialog(context: context, builder: (BuildContext context){
-        return AlertDialog(
-          title:  const Text('Error'),
-          content: SingleChildScrollView(
-            child: ListBody(children: const [
-                Text('Usuario o contraseña invalido'),
-              ]
-            ),
-          ),
-          actions: [
-            TextButton(onPressed: (() {
-              Navigator.of(context).pop();
-              _userController.clear();
-              _passwordController.clear();
-            }),
-            child: const Text('Acceptar'),
-            )
-          ],
-        );
-      });
+      // ignore: use_build_context_synchronously
+      Navigator.push(context,
+          MaterialPageRoute(builder: ((context) => Session(user: user))));
+    } else {
+      showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: SingleChildScrollView(
+                child: ListBody(children: const [
+                  Text('Usuario o contraseña invalido'),
+                ]),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: (() {
+                    Navigator.of(context).pop();
+                    _userController.clear();
+                    _passwordController.clear();
+                  }),
+                  child: const Text('Acceptar'),
+                )
+              ],
+            );
+          });
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,13 +91,13 @@ class _LoginState extends State<Login> {
                   controller: _userController,
                   cursorColor: const Color.fromARGB(255, 142, 108, 136),
                   style: TextStyle(
-                      color:
-                          const Color.fromARGB(255, 142, 108, 136).withOpacity(0.9)),
+                      color: const Color.fromARGB(255, 142, 108, 136)
+                          .withOpacity(0.9)),
                   decoration: InputDecoration(
                     labelText: 'Usuario',
                     labelStyle: TextStyle(
-                      color:
-                          const Color.fromARGB(255, 142, 108, 136).withOpacity(0.9),
+                      color: const Color.fromARGB(255, 142, 108, 136)
+                          .withOpacity(0.9),
                     ),
                     filled: true,
                     floatingLabelBehavior: FloatingLabelBehavior.never,
