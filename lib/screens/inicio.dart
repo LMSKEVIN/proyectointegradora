@@ -70,13 +70,16 @@ class _InicioState extends State<Inicio> {
                         height: 90.0,
                         child: AnimatedTextKit(
                           animatedTexts: [
-                            RotateAnimatedText('Rápido', textStyle: const TextStyle(fontSize: 40.0)),
-                            RotateAnimatedText('Sencillo', textStyle: const TextStyle(fontSize: 40.0)),
-                            RotateAnimatedText('Eficaz', textStyle: const TextStyle(fontSize: 40.0)),
+                            RotateAnimatedText('Rápido',
+                                textStyle: const TextStyle(fontSize: 40.0)),
+                            RotateAnimatedText('Sencillo',
+                                textStyle: const TextStyle(fontSize: 40.0)),
+                            RotateAnimatedText('Eficaz',
+                                textStyle: const TextStyle(fontSize: 40.0)),
                           ],
                           repeatForever: true,
                         ),
-                      ), 
+                      ),
                       SizedBox(
                         height: MediaQuery.of(context).size.height * 0.01,
                       ),
