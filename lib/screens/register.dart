@@ -65,7 +65,7 @@ class _RegisterState extends State<Register> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: const Text(
-          'Sign up',
+          'Registro',
           style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
       ),
@@ -89,6 +89,12 @@ class _RegisterState extends State<Register> {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
+                Image.asset(
+                  'assets/dibujo.png',
+                ),
+                const SizedBox(
+                  height: 100.0,
+                ),
                 TextField(
                   controller: _userController,
                   cursorColor:

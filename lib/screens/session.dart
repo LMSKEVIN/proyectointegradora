@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/screens/pruebas.dart';
-import 'package:integradoraproyect/widgets/datos.dart';
+import 'package:integradoraproyect/screens/exterior.dart';
 
 class Session extends StatefulWidget {
   final user;
@@ -12,20 +12,20 @@ class Session extends StatefulWidget {
 
 class _SessionState extends State<Session> {
   int _selectedIndex = 0;
+  final datos = user;
   void _onIteamTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
-
-  final List<Widget> _widgetOption = <Widget>[
-    datosUser(user),
+  final List<Widget> _widgetOption  = <Widget>[
     const SizedBox(
       width: double.infinity,
       child: Center(
         child: Text('world'),
       ),
     ),
+    Exterior(datos: user),
     const SizedBox(
       width: double.infinity,
       child: Center(

@@ -2,7 +2,7 @@ import 'package:integradoraproyect/db/mongodb.dart';
 import 'package:integradoraproyect/model/recados.dart';
 import 'package:integradoraproyect/model/user.dart';
 import 'package:flutter/material.dart';
-import 'package:integradoraproyect/widgets/api.dart';
+import 'package:integradoraproyect/api/api.dart';
 
 var user = 'kev';
 var password = 'pppp';
