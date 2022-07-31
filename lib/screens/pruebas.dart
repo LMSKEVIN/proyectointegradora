@@ -1,8 +1,7 @@
-import 'package:integradoraproyect/db/mongodb.dart';
-import 'package:integradoraproyect/model/recados.dart';
-import 'package:integradoraproyect/model/user.dart';
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/api/api.dart';
+import 'package:integradoraproyect/db/mongodb.dart';
+import 'package:integradoraproyect/screens/perro.dart';
 
 var user = 'kev';
 var password = 'pppp';
@@ -19,15 +18,17 @@ class Prueba extends StatefulWidget {
 }
 
 class _PruebaState extends State<Prueba> {
-  void datos() async {
-    var clima = await apiDatos();
-    print(clima);
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
+        body: Container(
+      child: cartaDatos(),
+    ));
+  }
+}
+
+/*
+Container(
         child: Column(
           children: [
             FloatingActionButton(
@@ -37,12 +38,10 @@ class _PruebaState extends State<Prueba> {
               Recados newrecado = Recados(title: title, description: description, date: date);
               //MongoDatabase.insertaruser(newusuario);
               MongoDatabase.actualizar(newusuario, newrecado);*/
-                datos();
+                _datos(user);
               },
             )
           ],
         ),
       ),
-    );
-  }
-}
+*/

@@ -24,22 +24,39 @@ class MongoDatabase {
     }
   }
 
+  static Future<List<Map<String, dynamic>>> getLista(String user) async {
+    try {
+      final usuario =
+          await collection.find(where.eq('userdata.user', user)).toList();
+      return usuario;
+    } catch (e) {
+      return Future.value();
+    }
+  }
+
   static insertaruser(Usuario usuario) async {
     await collection.insertAll([usuario.toMap()]);
   }
+
   static insertarlista(Usuario usuario, Recados recados) async {
     await collection.insert(where.eq('userdata.user', usuario.user));
   }
-  static logUsuario(TextEditingController user, TextEditingController pass) async{
-    var u = await collection.findOne({'userdata.user': user.text.toString(), 'userdata.password': pass.text.toString()});
+
+  static logUsuario(
+      TextEditingController user, TextEditingController pass) async {
+    var u = await collection.findOne({
+      'userdata.user': user.text.toString(),
+      'userdata.password': pass.text.toString()
+    });
     return u;
   }
 
-  static actualizar(Usuario usuario, Recados recados) async {
-    var u = await collection.update(where.eq('userdata.user', usuario.user), modify.push('list', recados.toMap()));
+  static actualizar(String usuario, Recados recados) async {
+    await collection.update(where.eq('userdata.user', usuario),
+        modify.push('list', recados.toMap()));
   }
-  static eliminar(Usuario usuario) async{
+
+  static eliminar(Usuario usuario) async {
     await collection.remove(where.eq('user', usuario.user));
   }
-  
 }
