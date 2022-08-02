@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:integradoraproyect/screens/interior.dart';
 import 'package:integradoraproyect/screens/pruebas.dart';
 import 'package:integradoraproyect/screens/exterior.dart';
 
@@ -18,13 +19,9 @@ class _SessionState extends State<Session> {
       _selectedIndex = index;
     });
   }
-  final List<Widget> _widgetOption  = <Widget>[
-    const SizedBox(
-      width: double.infinity,
-      child: Center(
-        child: Text('world'),
-      ),
-    ),
+
+  final List<Widget> _widgetOption = <Widget>[
+    Interior(),
     Exterior(datos: user),
     const SizedBox(
       width: double.infinity,
