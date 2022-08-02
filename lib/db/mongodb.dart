@@ -3,7 +3,6 @@ import 'package:flutter/widgets.dart';
 import 'package:integradoraproyect/constant/const.dart';
 import 'package:integradoraproyect/model/user.dart';
 import 'package:mongo_dart/mongo_dart.dart';
-
 import '../model/recados.dart';
 
 class MongoDatabase {

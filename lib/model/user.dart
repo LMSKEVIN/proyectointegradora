@@ -1,5 +1,4 @@
 class Usuario {
-  //final ObjectId id;
   final String user;
   final String password;
   final String email;

@@ -65,7 +65,7 @@ class _ExteriorState extends State<Exterior> {
             child: Column(
               children: [
                 SizedBox(
-                  height: MediaQuery.of(context).size.height / 6,
+                  height: MediaQuery.of(context).size.height / 4,
                   width: MediaQuery.of(context).size.width,
                   child: FutureBuilder(
                     future: apiDatos(),
@@ -209,90 +209,6 @@ class _ExteriorState extends State<Exterior> {
                     },
                   ),
                 ),
-                const SizedBox(
-                  height: 50,
-                ),
-                SingleChildScrollView(
-                  child: SizedBox(
-                    height: MediaQuery.of(context).size.height / 2,
-                    width: MediaQuery.of(context).size.width,
-                    child: FutureBuilder(
-                      future: MongoDatabase.getLista('Arnold'),
-                      builder: ((context, AsyncSnapshot snapshot) {
-                        if (snapshot.hasData) {
-                          return ListView.builder(
-                            itemCount: snapshot.data[0]['list'].length,
-                            itemBuilder: (context, index) {
-                              return FutureBuilder(
-                                future: MongoDatabase.getLista('Arnold'),
-                                builder: ((context, AsyncSnapshot snapshot) {
-                                  if (snapshot.hasData) {
-                                    return ListView.builder(
-                                      itemCount:
-                                          snapshot.data[0]['list'].length,
-                                      itemBuilder: (context, index) {
-                                        return Container(
-                                          child: Column(
-                                            children: [
-                                              Container(
-                                                height: 70,
-                                                width: 500,
-                                                margin: const EdgeInsets.only(
-                                                    left: 46.0, right: 46.0),
-                                                decoration: BoxDecoration(
-                                                  color: const Color.fromARGB(
-                                                      255, 170, 68, 101),
-                                                  shape: BoxShape.rectangle,
-                                                  borderRadius:
-                                                      BorderRadius.circular(
-                                                          8.0),
-                                                  boxShadow: const <BoxShadow>[
-                                                    BoxShadow(
-                                                      color: Colors.black12,
-                                                      blurRadius: 10.0,
-                                                    )
-                                                  ],
-                                                ),
-                                                child: Text('hola'),
-                                              )
-                                            ],
-                                          ),
-                                        );
-                                      },
-                                    );
-                                  } else {
-                                    return Center(
-                                      child: spinner(context),
-                                    );
-                                  }
-                                }),
-                              );
-                            },
-                          );
-                        } else {
-                          return Center(
-                            child: spinner(context),
-                          );
-                        }
-                      }),
-                    ),
-                  ),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
-                  children: [
-                    FloatingActionButton(
-                      child: const Icon(Icons.add),
-                      backgroundColor: Colors.amber,
-                      onPressed: () {
-                        formaDatos();
-                      },
-                    ),
-                    const SizedBox(
-                      width: 50,
-                    ),
-                  ],
-                )
               ],
             ),
           ),
