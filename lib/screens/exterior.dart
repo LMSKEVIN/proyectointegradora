@@ -68,134 +68,183 @@ class _ExteriorState extends State<Exterior> {
               future: apiDatos(),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
-                  return Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      const SizedBox(
-                        height: 50,
-                      ),
-                      Title(
-                        color: Colors.black,
-                        child: Text(
-                          snapshot.data['name'].toString(),
-                          style: const TextStyle(
-                              fontSize: 50, color: Colors.white),
+                  return SingleChildScrollView(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        const SizedBox(
+                          height: 50,
                         ),
-                      ),
-                      const SizedBox(
-                        height: 10,
-                      ),
-                      Image(
-                        image: AssetImage(_imgLoader(double.parse(
-                            snapshot.data['main']['temp'].toString()))),
-                        height: MediaQuery.of(context).size.height / 3,
-                        width: MediaQuery.of(context).size.width / 2,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            _limDatos(double.parse(
-                                    snapshot.data['main']['temp'].toString()))
-                                .toStringAsFixed(0),
+                        Title(
+                          color: Colors.black,
+                          child: Text(
+                            snapshot.data['name'].toString(),
                             style: const TextStyle(
-                              fontSize: 70,
-                              color: Colors.white,
-                            ),
+                                fontSize: 50, color: Colors.white),
                           ),
-                          Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: const [
-                              SizedBox(
-                                height: 30,
-                                child: Text(
-                                  '°',
-                                  style: TextStyle(
-                                    fontSize: 40,
-                                    color: Colors.white,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Image(
+                          image: AssetImage(_imgLoader(double.parse(
+                              snapshot.data['main']['temp'].toString()))),
+                          height: MediaQuery.of(context).size.height / 3,
+                          width: MediaQuery.of(context).size.width / 2,
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              _limDatos(double.parse(
+                                      snapshot.data['main']['temp'].toString()))
+                                  .toStringAsFixed(0),
+                              style: const TextStyle(
+                                fontSize: 70,
+                                color: Colors.white,
+                              ),
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: const [
+                                SizedBox(
+                                  height: 30,
+                                  child: Text(
+                                    '°',
+                                    style: TextStyle(
+                                      fontSize: 40,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
-                              ),
-                              SizedBox(
-                                height: 50,
-                                child: Text(
-                                  'C',
-                                  style: TextStyle(
-                                    fontSize: 40,
-                                    color: Colors.white,
+                                SizedBox(
+                                  height: 50,
+                                  child: Text(
+                                    'C',
+                                    style: TextStyle(
+                                      fontSize: 40,
+                                      color: Colors.white,
+                                    ),
                                   ),
                                 ),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(
+                          height: 10,
+                        ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 3,
+                              width: MediaQuery.of(context).size.width / 4,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Temperatura máxima',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    '${_limDatos(double.parse(snapshot.data['main']['temp_max'].toString())).toStringAsFixed(0)}°C     ',
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Text(
+                                    'Sensación térmica',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    '${_limDatos(double.parse(snapshot.data['main']['feels_like'].toString())).toStringAsFixed(0)}°C     ',
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                  ),
+                                ],
                               ),
-                            ],
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 20,
-                      ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Container(
-                            height: MediaQuery.of(context).size.height / 3,
-                            width: MediaQuery.of(context).size.width / 4,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'Sensación térmica',
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.deepOrange),
-                                ),
-                                Text(
-                                  '${_limDatos(double.parse(snapshot.data['main']['feels_like'].toString())).toStringAsFixed(0)}°C     ',
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.deepOrange),
-                                ),
-                              ],
                             ),
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height / 3,
-                            width: 10,
-                            decoration: BoxDecoration(
-                              color: Colors.white,
-                              shape: BoxShape.rectangle,
-                              borderRadius: BorderRadius.circular(8.0),
-                              boxShadow: const <BoxShadow>[
-                                BoxShadow(
-                                  color: Colors.black12,
-                                  blurRadius: 10.0,
-                                  offset: Offset(0.0, 10.0),
-                                )
-                              ],
+                            Container(
+                              height: MediaQuery.of(context).size.height / 4,
+                              width: 10,
+                              margin: const EdgeInsets.only(
+                                  left: 20.0, right: 20.0),
+                              decoration: BoxDecoration(
+                                color: Colors.white,
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(8.0),
+                                boxShadow: const <BoxShadow>[
+                                  BoxShadow(
+                                    color: Colors.black12,
+                                    blurRadius: 10.0,
+                                    offset: Offset(0.0, 10.0),
+                                  )
+                                ],
+                              ),
                             ),
-                          ),
-                          SizedBox(
-                            width: 10,
-                          ),
-                          Container(
-                            height: MediaQuery.of(context).size.height / 3,
-                            width: MediaQuery.of(context).size.width / 4,
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                const Text(
-                                  'Temperatura mínima',
-                                  style: TextStyle(
-                                      fontSize: 20, color: Colors.deepOrange),
-                                ),
-                                Text(
-                                  '${_limDatos(double.parse(snapshot.data['main']['temp_min'].toString())).toStringAsFixed(0)}°C',
-                                  style: const TextStyle(
-                                      fontSize: 20, color: Colors.deepOrange),
-                                ),
-                              ],
+                            const SizedBox(
+                              width: 10,
                             ),
-                          ),
-                        ],
-                      )
-                    ],
+                            SizedBox(
+                              height: MediaQuery.of(context).size.height / 3,
+                              width: MediaQuery.of(context).size.width / 4,
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  const Text(
+                                    'Temperatura mínima',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    '${_limDatos(double.parse(snapshot.data['main']['temp_min'].toString())).toStringAsFixed(0)}°C',
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  const Text(
+                                    'Humedad',
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  ),
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  Text(
+                                    '${(double.parse(snapshot.data['main']['humidity'].toString())).toStringAsFixed(0)}%',
+                                    style: const TextStyle(
+                                        fontSize: 20, color: Colors.black),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        )
+                      ],
+                    ),
                   );
                 } else {
                   return spinner(context);

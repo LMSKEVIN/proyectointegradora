@@ -21,8 +21,8 @@ class _SessionState extends State<Session> {
   }
 
   final List<Widget> _widgetOption = <Widget>[
-    Interior(),
     Exterior(datos: user),
+    Interior(),
     const SizedBox(
       width: double.infinity,
       child: Center(

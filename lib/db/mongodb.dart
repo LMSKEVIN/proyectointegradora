@@ -7,16 +7,18 @@ import '../model/recados.dart';
 
 class MongoDatabase {
   static var collection;
+  static var collection2;
   static connect() async {
     var db = await Db.create(mongoURL);
     await db.open();
     inspect(db);
     collection = db.collection(colectionName);
+    collection2 = db.collection(colectionName2);
   }
 
   static Future<List<Map<String, dynamic>>> getUsuario() async {
     try {
-      final usuario = await collection.find().toList();
+      final usuario = await collection2.find().toList();
       return usuario;
     } catch (e) {
       return Future.value();
@@ -35,10 +37,6 @@ class MongoDatabase {
 
   static insertaruser(Usuario usuario) async {
     await collection.insertAll([usuario.toMap()]);
-  }
-
-  static insertarlista(Usuario usuario, Recados recados) async {
-    await collection.insert(where.eq('userdata.user', usuario.user));
   }
 
   static logUsuario(
