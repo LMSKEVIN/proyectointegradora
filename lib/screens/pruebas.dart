@@ -20,12 +20,10 @@ class Prueba extends StatefulWidget {
 class _PruebaState extends State<Prueba> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(body: Container(
+    return Scaffold(
+        body: Container(
       child: FloatingActionButton(
-        onPressed: () async {
-          var dat = await MongoDatabase.getUsuario();
-          print(dat);
-        },
+        onPressed: () async {},
       ),
     ));
   }

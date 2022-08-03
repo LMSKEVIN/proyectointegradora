@@ -5,9 +5,10 @@ import 'package:integradoraproyect/widgets/datos.dart';
 import 'package:integradoraproyect/widgets/spinner.dart';
 
 class Exterior extends StatefulWidget {
-  Exterior({Key? key, required this.datos}) : super(key: key);
+  Exterior({
+    Key? key,
+  }) : super(key: key);
 
-  final datos;
   @override
   State<Exterior> createState() => _ExteriorState();
 }

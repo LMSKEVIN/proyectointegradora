@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/screens/interior.dart';
 import 'package:integradoraproyect/screens/pruebas.dart';
 import 'package:integradoraproyect/screens/exterior.dart';
 
 class Session extends StatefulWidget {
-  final user;
-  const Session({Key? key, required this.user}) : super(key: key);
+  const Session({
+    Key? key,
+  }) : super(key: key);
 
   @override
   State<Session> createState() => _SessionState();
@@ -21,12 +23,12 @@ class _SessionState extends State<Session> {
   }
 
   final List<Widget> _widgetOption = <Widget>[
-    Exterior(datos: user),
     Interior(),
-    const SizedBox(
+    Exterior(),
+    SizedBox(
       width: double.infinity,
       child: Center(
-        child: Text('!'),
+        child: Text(DatosUsuario.devolverDatos().toString()),
       ),
     ),
   ];
@@ -47,8 +49,8 @@ class _SessionState extends State<Session> {
             backgroundColor: Colors.purple,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Configuracion',
+            icon: Icon(Icons.note),
+            label: 'Notas',
             backgroundColor: Colors.purple,
           ),
         ],

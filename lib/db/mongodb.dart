@@ -16,9 +16,11 @@ class MongoDatabase {
     collection2 = db.collection(colectionName2);
   }
 
-  static Future<List<Map<String, dynamic>>> getUsuario() async {
+  static Future<List<Map<String, dynamic>>> getArduino() async {
     try {
-      final usuario = await collection2.find().toList();
+      final usuario = await collection2
+          .find(where.eq('sensores.nombre', 'MODEL-32'))
+          .toList();
       return usuario;
     } catch (e) {
       return Future.value();

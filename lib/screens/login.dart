@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/db/mongodb.dart';
 import 'package:integradoraproyect/screens/register.dart';
 import 'package:integradoraproyect/screens/session.dart';
@@ -18,10 +19,10 @@ class _LoginState extends State<Login> {
     var dat =
         await MongoDatabase.logUsuario(_userController, _passwordController);
     if (dat != null) {
-      var user = _userController.text;
+      DatosUsuario.ingresarDatos(_userController.text.toString());
       // ignore: use_build_context_synchronously
-      Navigator.push(context,
-          MaterialPageRoute(builder: ((context) => Session(user: user))));
+      Navigator.push(
+          context, MaterialPageRoute(builder: ((context) => Session())));
     } else {
       showDialog(
           context: context,
