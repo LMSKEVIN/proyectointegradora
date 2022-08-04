@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/screens/interior.dart';
+import 'package:integradoraproyect/screens/notas.dart';
 import 'package:integradoraproyect/screens/pruebas.dart';
 import 'package:integradoraproyect/screens/exterior.dart';
 
@@ -25,12 +26,7 @@ class _SessionState extends State<Session> {
   final List<Widget> _widgetOption = <Widget>[
     Interior(),
     Exterior(),
-    SizedBox(
-      width: double.infinity,
-      child: Center(
-        child: Text(DatosUsuario.devolverDatos().toString()),
-      ),
-    ),
+    Notas(),
   ];
   @override
   Widget build(BuildContext context) {

@@ -27,11 +27,11 @@ class MongoDatabase {
     }
   }
 
-  static Future<List<Map<String, dynamic>>> getLista(String user) async {
+  static getLista(String user) async {
     try {
       final usuario =
           await collection.find(where.eq('userdata.user', user)).toList();
-      return usuario;
+      return usuario[0]['list'];
     } catch (e) {
       return Future.value();
     }

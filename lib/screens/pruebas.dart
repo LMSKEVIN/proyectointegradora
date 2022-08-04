@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/api/api.dart';
+import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/db/mongodb.dart';
 import 'package:integradoraproyect/screens/perro.dart';
 
@@ -20,10 +21,12 @@ class Prueba extends StatefulWidget {
 class _PruebaState extends State<Prueba> {
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        body: Container(
+    return Scaffold(body: Container(
       child: FloatingActionButton(
-        onPressed: () async {},
+        onPressed: () async {
+          var dat = await MongoDatabase.getLista(user);
+          print(dat[0]);
+        },
       ),
     ));
   }
