@@ -15,6 +15,10 @@ class MongoDatabase {
     collection = db.collection(colectionName);
     collection2 = db.collection(colectionName2);
   }
+  static disconect() async{
+    var db = await Db.create(mongoURL);
+    db.close();
+  }
 
   static Future<List<Map<String, dynamic>>> getArduino() async {
     try {
@@ -27,11 +31,11 @@ class MongoDatabase {
     }
   }
 
-  static getLista(String user) async {
+  static Future<List<Map<String, dynamic>>> getLista(String user) async {
     try {
       final usuario =
           await collection.find(where.eq('userdata.user', user)).toList();
-      return usuario[0]['list'];
+      return usuario;
     } catch (e) {
       return Future.value();
     }
@@ -54,8 +58,8 @@ class MongoDatabase {
     await collection.update(where.eq('userdata.user', usuario),
         modify.push('list', recados.toMap()));
   }
-
-  static eliminar(Usuario usuario) async {
-    await collection.remove(where.eq('user', usuario.user));
-  }
+  /*
+  static eliminarList(String user, int index)async{
+    await collection.update(where.eq('userdata.user', user), modify.pull('index', ));
+  }*/
 }

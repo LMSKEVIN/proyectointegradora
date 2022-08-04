@@ -24,8 +24,7 @@ class _PruebaState extends State<Prueba> {
     return Scaffold(body: Container(
       child: FloatingActionButton(
         onPressed: () async {
-          var dat = await MongoDatabase.getLista(user);
-          print(dat[0]);
+          
         },
       ),
     ));

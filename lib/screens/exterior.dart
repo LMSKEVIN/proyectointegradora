@@ -14,17 +14,6 @@ class Exterior extends StatefulWidget {
 }
 
 class _ExteriorState extends State<Exterior> {
-  final TextEditingController cantidadController = TextEditingController();
-  final TextEditingController concepController = TextEditingController();
-  void formaDatos() async {
-    return await showModalBottomSheet(
-        elevation: 5,
-        isScrollControlled: true,
-        context: context,
-        builder: (_) =>
-            formatoRegistro(concepController, cantidadController, context));
-  }
-
   _imgLoader(double dat) {
     dat = dat - 273.15;
     var img;

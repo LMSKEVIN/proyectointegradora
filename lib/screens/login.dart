@@ -20,6 +20,8 @@ class _LoginState extends State<Login> {
         await MongoDatabase.logUsuario(_userController, _passwordController);
     if (dat != null) {
       DatosUsuario.ingresarDatos(_userController.text.toString());
+      _userController.clear();
+      _passwordController.clear();
       // ignore: use_build_context_synchronously
       Navigator.push(
           context, MaterialPageRoute(builder: ((context) => Session())));

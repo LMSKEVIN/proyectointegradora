@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-
 import '../db/mongodb.dart';
 import '../model/recados.dart';
 
-Container formatoRegistro(TextEditingController titleController,
+Container formatoRegistro(String user,TextEditingController titleController,
     TextEditingController descriptionController, BuildContext context) {
   return Container(
     padding: EdgeInsets.only(
@@ -37,7 +36,7 @@ Container formatoRegistro(TextEditingController titleController,
                   title: titleController.text,
                   description: descriptionController.text,
                   date: DateTime.now());
-              MongoDatabase.actualizar('Arnold', newrecado);
+              MongoDatabase.actualizar(user, newrecado);
               Navigator.pop(context);
             },
             child: const Text("Guardar")),

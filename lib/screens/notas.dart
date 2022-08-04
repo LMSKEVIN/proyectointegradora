@@ -3,6 +3,8 @@ import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/db/mongodb.dart';
 import 'package:integradoraproyect/widgets/spinner.dart';
 
+import '../widgets/datos.dart';
+
 class Notas extends StatefulWidget {
   Notas({Key? key}) : super(key: key);
 
@@ -11,9 +13,45 @@ class Notas extends StatefulWidget {
 }
 
 class _NotasState extends State<Notas> {
+  final TextEditingController cantidadController = TextEditingController();
+  final TextEditingController concepController = TextEditingController();
+  void formaDatos() async {
+    return await showModalBottomSheet(
+        elevation: 5,
+        isScrollControlled: true,
+        context: context,
+        builder: (_) =>
+            formatoRegistro(DatosUsuario.devolverDatos().toString(),concepController, cantidadController, context));
+  }
+  actualizarTodo(){
+    setState(() {
+      formaDatos();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Center(
+          child: Text('Bienvenido ${DatosUsuario.devolverDatos().toString()}'),
+          ),
+          backgroundColor: Colors.lightBlue,
+          automaticallyImplyLeading: false,
+          actions: <Widget>[
+            IconButton(onPressed: () {
+              Navigator.pop(context);
+              Navigator.pop(context);
+              MongoDatabase.disconect();
+            }, icon: const Icon(Icons.logout))
+          ],
+        ),
+      floatingActionButton: FloatingActionButton(onPressed: () {
+        actualizarTodo();
+      },
+      backgroundColor: Colors.amber, 
+      child: const Icon(Icons.note_add),
+      ),
       body: SafeArea(
         child: Container(
           height: double.infinity,
@@ -29,44 +67,34 @@ class _NotasState extends State<Notas> {
             ),
           ),
           child: SizedBox(
-            height: MediaQuery.of(context).size.height / 4,
-            width: MediaQuery.of(context).size.width,
-            child: FutureBuilder(
+            child: SingleChildScrollView(
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width,
+                child: FutureBuilder(
               future: MongoDatabase.getLista(
                   DatosUsuario.devolverDatos().toString()),
               builder: (context, AsyncSnapshot snapshot) {
                 if (snapshot.hasData) {
-                  return SingleChildScrollView(
-                    child: Column(
-                      children: [
-                        const SizedBox(
-                          height: 50,
-                        ),
-                        Title(
-                          color: Colors.white,
-                          child: Text(
-                            'Hola ${DatosUsuario.devolverDatos().toString()}',
-                            style: const TextStyle(
-                                color: Colors.white, fontSize: 50),
+                  return ListView.builder(itemCount: snapshot.data[0]['list'].length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        child: Card(
+                          child: SizedBox(
+                            height: 100,
+                            width: MediaQuery.of(context).size.width / 3,
+                            child: Text(snapshot.data[0]['list'][index]['title'].toString()),
                           ),
                         ),
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        ListView.builder(
-                          itemCount: snapshot.data,
-                          itemBuilder: (context, index) {
-                            return Container();
-                          },
-                        )
-                      ],
-                    ),
-                  );
+                      );
+                    });
                 } else {
                   return spinner(context);
                 }
               },
             ),
+              ),
+            )
           ),
         ),
       ),
