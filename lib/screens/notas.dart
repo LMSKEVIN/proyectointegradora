@@ -20,10 +20,11 @@ class _NotasState extends State<Notas> {
         elevation: 5,
         isScrollControlled: true,
         context: context,
-        builder: (_) =>
-            formatoRegistro(DatosUsuario.devolverDatos().toString(),concepController, cantidadController, context));
+        builder: (_) => formatoRegistro(DatosUsuario.devolverDatos().toString(),
+            concepController, cantidadController, context));
   }
-  actualizarTodo(){
+
+  actualizarTodo() {
     setState(() {
       formaDatos();
     });
@@ -35,22 +36,25 @@ class _NotasState extends State<Notas> {
       appBar: AppBar(
         title: Center(
           child: Text('Bienvenido ${DatosUsuario.devolverDatos().toString()}'),
-          ),
-          backgroundColor: Colors.lightBlue,
-          automaticallyImplyLeading: false,
-          actions: <Widget>[
-            IconButton(onPressed: () {
-              Navigator.pop(context);
-              Navigator.pop(context);
-              MongoDatabase.disconect();
-            }, icon: const Icon(Icons.logout))
-          ],
         ),
-      floatingActionButton: FloatingActionButton(onPressed: () {
-        actualizarTodo();
-      },
-      backgroundColor: Colors.amber, 
-      child: const Icon(Icons.note_add),
+        backgroundColor: Colors.lightBlue,
+        automaticallyImplyLeading: false,
+        actions: <Widget>[
+          IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+                Navigator.pop(context);
+                MongoDatabase.disconect();
+              },
+              icon: const Icon(Icons.logout))
+        ],
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          actualizarTodo();
+        },
+        backgroundColor: Colors.amber,
+        child: const Icon(Icons.note_add),
       ),
       body: SafeArea(
         child: Container(
@@ -67,49 +71,70 @@ class _NotasState extends State<Notas> {
             ),
           ),
           child: SizedBox(
-            child: SingleChildScrollView(
-              child: SizedBox(
-                height: MediaQuery.of(context).size.height,
-                width: MediaQuery.of(context).size.width,
-                child: FutureBuilder(
-              future: MongoDatabase.getLista(
-                  DatosUsuario.devolverDatos().toString()),
-              builder: (context, AsyncSnapshot snapshot) {
-                if (snapshot.hasData) {
-                  return ListView.builder(itemCount: snapshot.data[0]['list'].length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        child: Card(
-                          child: SizedBox(
-                            height: 100,
-                            width: MediaQuery.of(context).size.width / 3,
-                            child: Column(
-                              children: [ 
-                                Row(
+              child: SingleChildScrollView(
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height,
+              width: MediaQuery.of(context).size.width,
+              child: FutureBuilder(
+                future: MongoDatabase.getLista(
+                    DatosUsuario.devolverDatos().toString()),
+                builder: (context, AsyncSnapshot snapshot) {
+                  if (snapshot.hasData) {
+                    return ListView.builder(
+                        itemCount: snapshot.data[0]['list'].length,
+                        itemBuilder: (context, index) {
+                          return Container(
+                            child: Card(
+                              child: SizedBox(
+                                height: 100,
+                                width: MediaQuery.of(context).size.width / 3,
+                                child: Column(
                                   children: [
-                                    Text(
-                                      snapshot.data[0]['list'][index]['title'].toString(), 
-                                      style: TextStyle(
-                                        color: Colors.white, 
-                                        fontSize: MediaQuery.of(context).size.height
+                                    Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 50,
                                         ),
+                                        Text(
+                                          snapshot.data[0]['list'][index]
+                                                  ['title']
+                                              .toString(),
+                                          style: const TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 25),
+                                        ),
+                                      ],
+                                    ),
+                                    Row(
+                                      children: [
+                                        const SizedBox(
+                                          width: 50,
+                                        ),
+                                        Expanded(
+                                          child: Text(
+                                            snapshot.data[0]['list'][index]
+                                                    ['description']
+                                                .toString(),
+                                            style: const TextStyle(
+                                                color: Colors.indigo,
+                                                fontSize: 20),
+                                          ),
+                                        )
+                                      ],
                                     )
                                   ],
-                                )
-                              ],
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                      );
-                    });
-                } else {
-                  return spinner(context);
-                }
-              },
-            ),
+                          );
+                        });
+                  } else {
+                    return spinner(context);
+                  }
+                },
               ),
-            )
-          ),
+            ),
+          )),
         ),
       ),
     );

@@ -12,6 +12,32 @@ class Interior extends StatefulWidget {
 }
 
 class _InteriorState extends State<Interior> {
+  _imgLoader(double dat) {
+    var img = 'assets/gallo.jpg';
+    if (dat < 10) {
+      img = 'assets/Snow_House.png';
+      return img;
+    } else if (dat > 10 && dat <= 30) {
+      img = 'assets/Neutral_House.png';
+      return img;
+    } else {
+      img = 'assets/Hot_house.png';
+      return img;
+    }
+  }
+
+  _depurarDatos(double dat) {
+    if (dat < 350) {
+      return 'Exelente';
+    } else if (dat >= 350 && dat < 600) {
+      return 'Muy buena';
+    } else if (dat >= 600 && dat < 1000) {
+      return 'Buena';
+    } else if (dat >= 1000 && dat < 6000) {
+      return 'Mala';
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,17 +71,22 @@ class _InteriorState extends State<Interior> {
                         ),
                         Title(
                           color: Colors.black,
-                          child: Text(
-                            'Bienvenido ${DatosUsuario.devolverDatos().toString()}',
-                            style: const TextStyle(
-                                fontSize: 50, color: Colors.white),
+                          child: FittedBox(
+                            child: Text(
+                              'Bienvenido ${DatosUsuario.devolverDatos().toString()}',
+                              style: const TextStyle(
+                                  fontSize: 50, color: Colors.white),
+                            ),
                           ),
                         ),
                         const SizedBox(
                           height: 20,
                         ),
                         Image(
-                          image: const AssetImage('assets/casa.png'),
+                          image: AssetImage(_imgLoader(double.parse(snapshot
+                                  .data[0]['sensores']['temperature']
+                                  .toString()))
+                              .toString()),
                           height: MediaQuery.of(context).size.height / 3,
                           width: MediaQuery.of(context).size.width / 2,
                         ),
@@ -65,12 +96,14 @@ class _InteriorState extends State<Interior> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              snapshot.data[0]['sensores']['temperature']
-                                  .toString(),
-                              style: const TextStyle(
-                                fontSize: 70,
-                                color: Colors.white,
+                            FittedBox(
+                              child: Text(
+                                snapshot.data[0]['sensores']['temperature']
+                                    .toString(),
+                                style: const TextStyle(
+                                  fontSize: 70,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             Column(
@@ -112,19 +145,28 @@ class _InteriorState extends State<Interior> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Calidad del aire',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  const FittedBox(
+                                    child: Text(
+                                      'Calidad del aire',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color:
+                                              Color.fromARGB(124, 4, 53, 110)),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    '${snapshot.data[0]['sensores']['air_quiality'].toStringAsFixed(0)}%',
-                                    style: const TextStyle(
-                                        fontSize: 20, color: Colors.black),
+                                  FittedBox(
+                                    child: Text(
+                                      _depurarDatos(double.parse(snapshot
+                                              .data[0]['sensores']
+                                                  ['air_quiality']
+                                              .toStringAsFixed(0)))
+                                          .toString(),
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
@@ -159,22 +201,24 @@ class _InteriorState extends State<Interior> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Humedad',
-                                    style: TextStyle(
+                                  const FittedBox(
+                                    child: Text(
+                                      'Humedad',
+                                      style: TextStyle(
                                         fontSize: 20,
-                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                        color: Color.fromARGB(124, 4, 53, 110),
+                                      ),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    '${snapshot.data[0]['sensores']['humidity'].toString()}%',
-                                    style: const TextStyle(
-                                        fontSize: 20, color: Colors.black),
-                                  ),
-                                  const SizedBox(
-                                    height: 10,
+                                  FittedBox(
+                                    child: Text(
+                                      '${snapshot.data[0]['sensores']['humidity'].toString()}%',
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
                                   ),
                                 ],
                               ),

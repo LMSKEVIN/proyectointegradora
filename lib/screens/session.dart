@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/screens/interior.dart';
 import 'package:integradoraproyect/screens/notas.dart';
-import 'package:integradoraproyect/screens/pruebas.dart';
 import 'package:integradoraproyect/screens/exterior.dart';
 
 class Session extends StatefulWidget {
@@ -16,7 +15,6 @@ class Session extends StatefulWidget {
 
 class _SessionState extends State<Session> {
   int _selectedIndex = 0;
-  final datos = user;
   void _onIteamTapped(int index) {
     setState(() {
       _selectedIndex = index;

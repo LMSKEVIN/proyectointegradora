@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/api/api.dart';
-import 'package:integradoraproyect/db/mongodb.dart';
-import 'package:integradoraproyect/widgets/datos.dart';
 import 'package:integradoraproyect/widgets/spinner.dart';
 
 class Exterior extends StatefulWidget {
@@ -16,7 +14,7 @@ class Exterior extends StatefulWidget {
 class _ExteriorState extends State<Exterior> {
   _imgLoader(double dat) {
     dat = dat - 273.15;
-    var img;
+    var img = 'assets/gallo.jpg';
     if (dat < 10) {
       img = 'assets/low.png';
       return img;
@@ -67,10 +65,12 @@ class _ExteriorState extends State<Exterior> {
                         ),
                         Title(
                           color: Colors.black,
-                          child: Text(
-                            snapshot.data['name'].toString(),
-                            style: const TextStyle(
-                                fontSize: 50, color: Colors.white),
+                          child: FittedBox(
+                            child: Text(
+                              snapshot.data['name'].toString(),
+                              style: const TextStyle(
+                                  fontSize: 50, color: Colors.white),
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -88,13 +88,16 @@ class _ExteriorState extends State<Exterior> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Text(
-                              _limDatos(double.parse(
-                                      snapshot.data['main']['temp'].toString()))
-                                  .toStringAsFixed(0),
-                              style: const TextStyle(
-                                fontSize: 70,
-                                color: Colors.white,
+                            FittedBox(
+                              child: Text(
+                                _limDatos(double.parse(snapshot.data['main']
+                                            ['temp']
+                                        .toString()))
+                                    .toStringAsFixed(0),
+                                style: const TextStyle(
+                                  fontSize: 70,
+                                  color: Colors.white,
+                                ),
                               ),
                             ),
                             Column(
@@ -102,21 +105,25 @@ class _ExteriorState extends State<Exterior> {
                               children: const [
                                 SizedBox(
                                   height: 30,
-                                  child: Text(
-                                    '°',
-                                    style: TextStyle(
-                                      fontSize: 40,
-                                      color: Colors.white,
+                                  child: FittedBox(
+                                    child: Text(
+                                      '°',
+                                      style: TextStyle(
+                                        fontSize: 40,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
                                 SizedBox(
                                   height: 50,
-                                  child: Text(
-                                    'C',
-                                    style: TextStyle(
-                                      fontSize: 40,
-                                      color: Colors.white,
+                                  child: FittedBox(
+                                    child: Text(
+                                      'C',
+                                      style: TextStyle(
+                                        fontSize: 40,
+                                        color: Colors.white,
+                                      ),
                                     ),
                                   ),
                                 ),
@@ -136,37 +143,47 @@ class _ExteriorState extends State<Exterior> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Temperatura máxima',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  const FittedBox(
+                                    child: Text(
+                                      'Temperatura máxima',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color:
+                                              Color.fromARGB(124, 4, 53, 110)),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    '${_limDatos(double.parse(snapshot.data['main']['temp_max'].toString())).toStringAsFixed(0)}°C     ',
-                                    style: const TextStyle(
-                                        fontSize: 20, color: Colors.black),
+                                  FittedBox(
+                                    child: Text(
+                                      '${_limDatos(double.parse(snapshot.data['main']['temp_max'].toString())).toStringAsFixed(0)}°C     ',
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  const Text(
-                                    'Sensación térmica',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  const FittedBox(
+                                    child: Text(
+                                      'Sensación térmica',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color:
+                                              Color.fromARGB(124, 4, 53, 110)),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    '${_limDatos(double.parse(snapshot.data['main']['feels_like'].toString())).toStringAsFixed(0)}°C     ',
-                                    style: const TextStyle(
-                                        fontSize: 20, color: Colors.black),
-                                  ),
+                                  FittedBox(
+                                    child: Text(
+                                      '${_limDatos(double.parse(snapshot.data['main']['feels_like'].toString())).toStringAsFixed(0)}°C     ',
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
@@ -197,37 +214,47 @@ class _ExteriorState extends State<Exterior> {
                               child: Column(
                                 mainAxisAlignment: MainAxisAlignment.center,
                                 children: [
-                                  const Text(
-                                    'Temperatura mínima',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  const FittedBox(
+                                    child: Text(
+                                      'Temperatura mínima',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color:
+                                              Color.fromARGB(124, 4, 53, 110)),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    '${_limDatos(double.parse(snapshot.data['main']['temp_min'].toString())).toStringAsFixed(0)}°C',
-                                    style: const TextStyle(
-                                        fontSize: 20, color: Colors.black),
+                                  FittedBox(
+                                    child: Text(
+                                      '${_limDatos(double.parse(snapshot.data['main']['temp_min'].toString())).toStringAsFixed(0)}°C',
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  const Text(
-                                    'Humedad',
-                                    style: TextStyle(
-                                        fontSize: 20,
-                                        color: Color.fromARGB(124, 4, 53, 110)),
+                                  const FittedBox(
+                                    child: Text(
+                                      'Humedad',
+                                      style: TextStyle(
+                                          fontSize: 20,
+                                          color:
+                                              Color.fromARGB(124, 4, 53, 110)),
+                                    ),
                                   ),
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  Text(
-                                    '${(double.parse(snapshot.data['main']['humidity'].toString())).toStringAsFixed(0)}%',
-                                    style: const TextStyle(
-                                        fontSize: 20, color: Colors.black),
-                                  ),
+                                  FittedBox(
+                                    child: Text(
+                                      '${(double.parse(snapshot.data['main']['humidity'].toString())).toStringAsFixed(0)}%',
+                                      style: const TextStyle(
+                                          fontSize: 20, color: Colors.black),
+                                    ),
+                                  )
                                 ],
                               ),
                             ),
