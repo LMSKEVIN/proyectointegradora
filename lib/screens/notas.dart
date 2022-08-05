@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/db/mongodb.dart';
+import 'package:integradoraproyect/widgets/nota.dart';
 import 'package:integradoraproyect/widgets/spinner.dart';
 
 import '../widgets/datos.dart';
@@ -24,12 +25,6 @@ class _NotasState extends State<Notas> {
             concepController, cantidadController, context));
   }
 
-  actualizarTodo() {
-    setState(() {
-      formaDatos();
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,7 +46,7 @@ class _NotasState extends State<Notas> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          actualizarTodo();
+          formaDatos();
         },
         backgroundColor: Colors.amber,
         child: const Icon(Icons.note_add),

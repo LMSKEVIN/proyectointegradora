@@ -60,9 +60,6 @@ class _ExteriorState extends State<Exterior> {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        const SizedBox(
-                          height: 50,
-                        ),
                         Title(
                           color: Colors.black,
                           child: FittedBox(
