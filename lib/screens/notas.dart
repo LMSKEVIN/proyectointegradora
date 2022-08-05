@@ -83,7 +83,21 @@ class _NotasState extends State<Notas> {
                           child: SizedBox(
                             height: 100,
                             width: MediaQuery.of(context).size.width / 3,
-                            child: Text(snapshot.data[0]['list'][index]['title'].toString()),
+                            child: Column(
+                              children: [ 
+                                Row(
+                                  children: [
+                                    Text(
+                                      snapshot.data[0]['list'][index]['title'].toString(), 
+                                      style: TextStyle(
+                                        color: Colors.white, 
+                                        fontSize: MediaQuery.of(context).size.height
+                                        ),
+                                    )
+                                  ],
+                                )
+                              ],
+                            ),
                           ),
                         ),
                       );
