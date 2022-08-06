@@ -43,8 +43,15 @@ class MongoDatabase {
     }
   }
 
-  static insertaruser(Usuario usuario) async {
-    await collection.insertAll([usuario.toMap()]);
+  static insertaruser(Usuario usuario, String user) async {
+    var u = await collection.findOne({'userdata.user': user});
+    bool ret;
+    if(u != null){
+      return ret = false;
+    }else{
+      await collection.insertAll([usuario.toMap()]);
+      return ret = true;
+    }
   }
 
   static logUsuario(

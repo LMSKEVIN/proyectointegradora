@@ -21,7 +21,7 @@ class _RegisterState extends State<Register> {
       encrypt = SM3.encryptString(pass.text);
     });
   }
-  void _registro() {
+  void _registro() async{
     if (_userController.text.toString() != '' &&
         _emailController.text.toString() != '' &&
         _passwordController.toString() != '') {
@@ -30,15 +30,41 @@ class _RegisterState extends State<Register> {
           user: _userController.text,
           email: _emailController.text,
           password: encrypt);
-      MongoDatabase.insertaruser(newuser);
-      _userController.clear();
-      _passwordController.clear();
-      Navigator.push(
+          if(await MongoDatabase.insertaruser(newuser, _userController.text)){
+            Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => Login(),
         ),
       );
+          }else{
+            showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: const Text('Error'),
+              content: SingleChildScrollView(
+                child: ListBody(children: const [
+                  Text('El usuario ya esta en uso'),
+                ]),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: (() {
+                    Navigator.of(context).pop();
+                    _userController.clear();
+                    _passwordController.clear();
+                    _emailController.clear();
+                  }),
+                  child: const Text('Acceptar'),
+                )
+              ],
+            );
+          });
+          }
+      _userController.clear();
+      _emailController.clear();
+      _passwordController.clear();
     } else {
       showDialog(
           context: context,
