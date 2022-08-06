@@ -48,10 +48,10 @@ class MongoDatabase {
   }
 
   static logUsuario(
-      TextEditingController user, TextEditingController pass) async {
+      TextEditingController user, String pass) async {
     var u = await collection.findOne({
       'userdata.user': user.text.toString(),
-      'userdata.password': pass.text.toString()
+      'userdata.password': pass
     });
     return u;
   }

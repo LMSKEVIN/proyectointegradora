@@ -3,6 +3,7 @@ import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/db/mongodb.dart';
 import 'package:integradoraproyect/screens/register.dart';
 import 'package:integradoraproyect/screens/session.dart';
+import 'package:sm_crypto/sm_crypto.dart';
 
 class Login extends StatefulWidget {
   Login({Key? key}) : super(key: key);
@@ -14,10 +15,16 @@ class Login extends StatefulWidget {
 class _LoginState extends State<Login> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  String encrypt = '';
+  void encryptMet(TextEditingController pass){
+    setState(() {
+      encrypt = SM3.encryptString(pass.text);
+    });
+  }
   _usuario(BuildContext context) async {
+    encryptMet(_passwordController);
     var dat =
-        await MongoDatabase.logUsuario(_userController, _passwordController);
+        await MongoDatabase.logUsuario(_userController, encrypt);
     if (dat != null) {
       DatosUsuario.ingresarDatos(_userController.text.toString());
       _userController.clear();

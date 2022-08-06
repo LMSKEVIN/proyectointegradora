@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:integradoraproyect/screens/login.dart';
 import 'package:integradoraproyect/db/mongodb.dart';
 import 'package:integradoraproyect/model/user.dart';
+import 'package:sm_crypto/sm_crypto.dart';
 
 class Register extends StatefulWidget {
   Register({Key? key}) : super(key: key);
@@ -14,16 +15,24 @@ class _RegisterState extends State<Register> {
   final TextEditingController _userController = TextEditingController();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
+  String encrypt = '';
+  void encryptMet(TextEditingController pass){
+    setState(() {
+      encrypt = SM3.encryptString(pass.text);
+    });
+  }
   void _registro() {
     if (_userController.text.toString() != '' &&
         _emailController.text.toString() != '' &&
         _passwordController.toString() != '') {
+      encryptMet(_passwordController);
       Usuario newuser = Usuario(
           user: _userController.text,
           email: _emailController.text,
-          password: _passwordController.text);
+          password: encrypt);
       MongoDatabase.insertaruser(newuser);
+      _userController.clear();
+      _passwordController.clear();
       Navigator.push(
         context,
         MaterialPageRoute(
