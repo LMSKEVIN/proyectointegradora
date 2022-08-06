@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/db/mongodb.dart';
-import 'package:integradoraproyect/widgets/nota.dart';
 import 'package:integradoraproyect/widgets/spinner.dart';
 
 import '../widgets/datos.dart';
@@ -129,7 +128,7 @@ class _NotasState extends State<Notas> {
                 },
               ),
             ),
-          )),
+          ),),
         ),
       ),
     );

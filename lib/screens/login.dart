@@ -24,7 +24,7 @@ class _LoginState extends State<Login> {
       _passwordController.clear();
       // ignore: use_build_context_synchronously
       Navigator.push(
-          context, MaterialPageRoute(builder: ((context) => Session())));
+          context, MaterialPageRoute(builder: ((context) => const Session())));
     } else {
       showDialog(
           context: context,

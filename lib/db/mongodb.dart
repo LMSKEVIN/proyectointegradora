@@ -27,6 +27,7 @@ class MongoDatabase {
           .toList();
       return usuario;
     } catch (e) {
+      // ignore: null_argument_to_non_null_type
       return Future.value();
     }
   }
@@ -37,6 +38,7 @@ class MongoDatabase {
           await collection.find(where.eq('userdata.user', user)).toList();
       return usuario;
     } catch (e) {
+      // ignore: null_argument_to_non_null_type
       return Future.value();
     }
   }
