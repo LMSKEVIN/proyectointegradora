@@ -3,6 +3,7 @@ import 'package:integradoraproyect/constant/datosuser.dart';
 import 'package:integradoraproyect/db/mongodb.dart';
 import 'package:integradoraproyect/widgets/spinner.dart';
 
+import '../model/recados.dart';
 import '../widgets/datos.dart';
 
 class Notas extends StatefulWidget {
@@ -13,15 +14,53 @@ class Notas extends StatefulWidget {
 }
 
 class _NotasState extends State<Notas> {
-  final TextEditingController cantidadController = TextEditingController();
-  final TextEditingController concepController = TextEditingController();
+  final TextEditingController titleController = TextEditingController();
+  final TextEditingController descriptionController = TextEditingController();
+
   void formaDatos() async {
     return await showModalBottomSheet(
         elevation: 5,
         isScrollControlled: true,
         context: context,
-        builder: (_) => formatoRegistro(DatosUsuario.devolverDatos().toString(),
-            concepController, cantidadController, context));
+        builder: (_) => Container(
+              padding: EdgeInsets.only(
+                  left: 10,
+                  right: 10,
+                  top: 10,
+                  bottom: 50 + MediaQuery.of(context).viewInsets.bottom),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  TextField(
+                    controller: titleController,
+                    decoration: const InputDecoration(hintText: "Titulo:"),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  TextField(
+                    controller: descriptionController,
+                    decoration: const InputDecoration(hintText: "Descripcion:"),
+                  ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  ElevatedButton(
+                      onPressed: _agregarDatos, child: const Text("Guardar"))
+                ],
+              ),
+            ));
+  }
+
+  void _agregarDatos(){
+    Recados newrecado = Recados(
+                  title: titleController.text,
+                  description: descriptionController.text,
+                  date: DateTime.now());
+    setState(() {
+      MongoDatabase.actualizar(DatosUsuario.devolverDatos().toString(), newrecado);
+    });
+    Navigator.pop(context);
   }
 
   @override
@@ -45,7 +84,7 @@ class _NotasState extends State<Notas> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          formaDatos();
+            formaDatos();
         },
         backgroundColor: Colors.amber,
         child: const Icon(Icons.note_add),
