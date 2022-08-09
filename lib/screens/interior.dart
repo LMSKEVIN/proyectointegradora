@@ -96,7 +96,7 @@ class _InteriorState extends State<Interior> {
                             FittedBox(
                               child: Text(
                                 snapshot.data[0]['sensores']['temperature']
-                                    .toString(),
+                                    .toStringAsFixed(0),
                                 style: const TextStyle(
                                   fontSize: 70,
                                   color: Colors.white,
@@ -202,7 +202,7 @@ class _InteriorState extends State<Interior> {
                                     child: Text(
                                       'Humedad',
                                       style: TextStyle(
-                                        fontSize: 20,
+                                        fontSize: 15,
                                         color: Color.fromARGB(124, 4, 53, 110),
                                       ),
                                     ),

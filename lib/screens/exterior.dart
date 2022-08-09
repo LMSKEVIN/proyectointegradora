@@ -237,7 +237,7 @@ class _ExteriorState extends State<Exterior> {
                                     child: Text(
                                       'Humedad',
                                       style: TextStyle(
-                                          fontSize: 20,
+                                          fontSize: 15,
                                           color:
                                               Color.fromARGB(124, 4, 53, 110)),
                                     ),
